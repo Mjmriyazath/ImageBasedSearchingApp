@@ -1,7 +1,7 @@
 // src/ImageUpload.js
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import './ImageUpload.css'
 const ImageUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [relatedImages, setRelatedImages] = useState([]);
@@ -29,6 +29,11 @@ const ImageUpload = () => {
 
   return (
     <div>
+     <div className="App">
+    <header className="App-header">
+      <h1>Pixel Search</h1>
+      </header>
+  </div>
       <form onSubmit={handleSubmit}>
         <input type="file" onChange={handleFileChange} />
         <button type="submit">Upload</button>
