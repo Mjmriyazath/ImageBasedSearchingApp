@@ -28,7 +28,7 @@ const ImageUpload = () => {
   };
 
   return (
-    <div>
+    <div className="image-upload">
      <div className="App">
     <header className="header">
       <h1>Pixel Search</h1>
@@ -38,7 +38,7 @@ const ImageUpload = () => {
         <input type="file" onChange={handleFileChange} />
         <button type="submit">Upload</button>
       </form>
-      <div>
+      <div className="related-images">
         {relatedImages.map((image, index) => (
           <img key={index} src={image} alt="Related" />
         ))}
