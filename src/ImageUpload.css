@@ -1,6 +1,6 @@
 /* Style the entire component container */
 .image-upload {
-  background-image: url("../assets/pixel1.webp");/* Light gray background (optional) */
+  background-image: url("pixel1.webp");/* Light gray background (optional) */
   padding: 2rem;
   border-radius: 5px; /* Gentle rounded corners */
   margin: 0 auto; /* Center horizontally */
@@ -39,6 +39,7 @@
     border: 1px solid #ccc; /* Light border */
     border-radius: 3px; /* Small rounded corners */
     cursor: pointer; /* Indicate clickable area */
+    color: black;
   }
   
   /* Style the submit button */
