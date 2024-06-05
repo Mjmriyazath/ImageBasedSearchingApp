@@ -30,7 +30,7 @@ const ImageUpload = () => {
   return (
     <div>
      <div className="App">
-    <header className="App-header">
+    <header className="header">
       <h1>Pixel Search</h1>
       </header>
   </div>
