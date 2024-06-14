@@ -5,11 +5,10 @@ import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 
 const LoginRegister = () => {
     const [action, setAction] = useState('');
-    const [usernameLogin, setUsernameLogin] = useState('');
-    const [passwordLogin, setPasswordLogin] = useState('');
-    const [usernameRegister, setUsernameRegister] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [passwordRegister, setPasswordRegister] = useState('');
+    const [password, setPassword] = useState('');
+    const [loginSuccess, setLoginSuccess] = useState(false);
 
     const registerLink = () => {
         setAction(' active');
@@ -22,16 +21,13 @@ const LoginRegister = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:4000/registrations', {
-                username: usernameRegister,
+            await axios.post('http://localhost:5000/registrations', {
+                username: username,
                 email: email,
-                password: passwordRegister
+                password: password
             });
             alert('Registration successful');
-            // Clear registration form fields after successful registration
-            setUsernameRegister('');
-            setEmail('');
-            setPasswordRegister('');
+            // Optionally, you can redirect the user to the login page here
         } catch (error) {
             console.error('Error registering user:', error.response.data.message);
             alert('Failed to register. Please try again.');
@@ -41,15 +37,17 @@ const LoginRegister = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/login', {
-                username: usernameLogin,
-                password: passwordLogin
+            // Make a request to your backend to verify the login credentials
+            const response = await axios.get('http://localhost:5000/registrations', {
+                username: username,
+                password: password
             });
-            // If login is successful, display success message and optionally redirect user
+            // If login is successful, display success message and reset form
+            setLoginSuccess(true);
+            setUsername('');
+            setPassword('');
             alert('Login successful');
-            // Clear login form fields after successful login
-            setUsernameLogin('');
-            setPasswordLogin('');
+            // Optionally, you can redirect the user to a dashboard page here
         } catch (error) {
             console.error('Error logging in:', error.response.data.message);
             alert('Failed to login. Please check your credentials and try again.');
@@ -62,11 +60,11 @@ const LoginRegister = () => {
                 <form onSubmit={handleLogin}>
                     <h1>Login</h1>
                     <div className='input-box'>
-                        <input type='text' placeholder='Username' value={usernameLogin} onChange={(e) => setUsernameLogin(e.target.value)} required />
+                        <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} required />
                         <FaUser className='icon' />
                     </div>
                     <div className='input-box'>
-                        <input type='password' placeholder='Password' value={passwordLogin} onChange={(e) => setPasswordLogin(e.target.value)} required />
+                        <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
                         <FaLock className='icon' />
                     </div>
                     <div className='remember-forgot'>
@@ -77,7 +75,7 @@ const LoginRegister = () => {
                     </div>
                     <button type='submit'>Login</button>
                     <div className='register-link'>
-                        <p>Don't have an account?<a href='#' onClick={registerLink}>Register</a></p>
+                        <p>Don't have an account?<a href='#' onClick={registerLink} >Register</a></p>
                     </div>
                 </form>
             </div>
@@ -86,7 +84,7 @@ const LoginRegister = () => {
                 <form onSubmit={handleRegister}>
                     <h1>Registration</h1>
                     <div className='input-box'>
-                        <input type='text' placeholder='Username' value={usernameRegister} onChange={(e) => setUsernameRegister(e.target.value)} required />
+                        <input type='text' placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} required />
                         <FaUser className='icon' />
                     </div>
                     <div className='input-box'>
@@ -94,7 +92,7 @@ const LoginRegister = () => {
                         <FaEnvelope className='icon' />
                     </div>
                     <div className='input-box'>
-                        <input type='password' placeholder='Password' value={passwordRegister} onChange={(e) => setPasswordRegister(e.target.value)} required />
+                        <input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
                         <FaLock className='icon' />
                     </div>
                     <div className='remember-forgot'>
