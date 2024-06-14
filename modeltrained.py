@@ -41,7 +41,7 @@ print(f"Loss: {loss}")
 print(f"Accuracy: {accuracy}")
 
 
-model.save('image_classifier.h5')
+model.save('yolov3.cfg')
 
 
 
